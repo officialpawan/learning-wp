@@ -7,4 +7,8 @@
 </head>
 <body>
 
-<header>header.php</header>
+<?php
+aura_template_parts('template-parts/header', [
+	'text' => 'header',
+]);
+?>

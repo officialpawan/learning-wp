@@ -1,5 +1,9 @@
 <?php get_header(); ?>
 
-<main>index.php</main>
+<?php
+aura_template_parts('template-parts/main', [
+	'text' => 'main',
+]);
+?>
 
 <?php get_footer(); ?>
