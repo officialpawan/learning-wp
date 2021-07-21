@@ -1,9 +1,9 @@
 <?php
 
 function aura_template_parts($slug, $args){
-	do_action( 'aura_theme_template_part_before', $slug, $args );
+	$args = apply_filters( 'aura_theme_template_part_tag', $args, $slug );
 
-	$args['text'] = apply_filters( 'update_main', $slug, $args['text'] );
+	do_action( 'aura_theme_template_part_before', $slug, $args );
 
 	get_template_part( $slug, null, $args );
 
@@ -12,13 +12,11 @@ function aura_template_parts($slug, $args){
 
 
 
-add_filter( 'update_main', 'my_filter', 10, 2);
+add_filter( 'aura_theme_template_part_tag', 'my_filter', 10, 2);
 
-function my_filter( $slug, $args ){
-	if ( $slug === 'template-parts/main') {
-		$args = 'pawan';
-		return $args;
-	}else{
-		return $args;
+function my_filter( $args, $slug ){
+	if ( $slug === 'template-parts/main' && is_singular( [ 'post', 'page'] )) {
+		$args['text'] = 'pawan';
 	}
+		return $args;
 }
