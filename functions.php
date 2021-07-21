@@ -7,6 +7,10 @@ function aura_template_parts($slug, $args){
 		return;
 	}
 
+	$slug = apply_filters( 'aura_theme_template_part_slug', $slug );
+
+
+
 	$args = apply_filters( 'aura_theme_template_part_tag', $args, $slug );
 
 	do_action( 'aura_theme_template_part_before', $slug, $args );
@@ -33,4 +37,12 @@ function remove_header( $status, $slug ){
 		$status = false;
 	}
 	return $status;
+}
+
+add_filter('aura_theme_template_part_slug', 'updated_slug', 10, 2);
+function updated_slug( $slug){
+	if( $slug === 'template-parts/footer' && is_singular( [ 'post', 'page'] )){
+		$slug = 'template-parts/footer-alt';
+	}
+	return $slug;
 }
