@@ -39,7 +39,7 @@ function remove_header( $status, $slug ){
 	return $status;
 }
 
-add_filter('aura_theme_template_part_slug', 'updated_slug', 10, 2);
+add_filter('aura_theme_template_part_slug', 'updated_slug');
 function updated_slug( $slug){
 	if( $slug === 'template-parts/footer' && is_singular( [ 'post', 'page'] )){
 		$slug = 'template-parts/footer-alt';
